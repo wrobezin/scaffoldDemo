@@ -1,0 +1,30 @@
+# maven ignore
+target/
+*.war
+*.tar
+*.tar.gz
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+.springBeans
+.pydevproject
+
+# idea ignore
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+/.idea/
+/sdklog/
+/logTest/
+/logs/

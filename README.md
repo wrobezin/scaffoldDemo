@@ -1,0 +1,43 @@
+本项目旨在实现一个自用的 SpringBoot 脚手架环境，提供各种常用功能，供新项目直接使用。
+
+已实现：
++ 基于注解的 Controller 入参校验
+
+开发中：
++ 独立 Swagger 模块
+
+计划中：
++ 常用工具类集成
++ 基于注解的请求签名校验
++ 基于注解的 PO-VO 转换
++ 集成 JWT
++ 可插拔的 Shiro 和 SpringSecurity
++ 带后台的独立日志模块
++ 定时任务调度系统
+
+## 基于注解的 Controller 入参校验
+
+### 使用方法
+
+在 Controller 的方法参数和实体类字段上添加注解，然后通过 AOP 以 `@around` 方式调用 `AggregateValidator` 进行校验。
+
+详见 `web` 模块 `HelloController`、`ControllerParampeterCheckAspect` 两个类的代码 及 `business` 模块 `Student` 等类的代码。
+
+### 单元测试
+
+`web` 模块的 `HelloControllerTest` 类。
+
+### 扩展方法（common模块）
+
+#### 在已有校验器链中添加新的校验器
++ 编写新的校验注解。
++ 编写新的校验器类，继承 `AbstractParameterValidator` 类或实现 `ParameterValidator` 接口，针对新写的注解作校验。
++ 把新写的校验器添加到已有校验器链中（重构点）。
+
+#### 添加新的校验器链
++ 编写新的校验器链类，继承 `AbstractParameterValidatorChain` 类或实现 `ValidatorChain` 接口。
++ 把新写的校验器链添加到 `AggregateValidator` 类中（重构点）。
+
+### 重构点
+
+见 `common` 模块 `check` 包下的 `TODO`。
