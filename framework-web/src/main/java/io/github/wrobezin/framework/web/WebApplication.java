@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  * date: 2019/12/16
  */
 @SpringBootApplication
-@ComponentScan({"io.github.wrobezin.framework.common", "io.github.wrobezin.framework.business", "io.github.wrobezin.framework.web"})
+@ComponentScan({"io.github.wrobezin.framework.common", "io.github.wrobezin.framework.business", "io.github.wrobezin.framework.web", "io.github.wrobezin.framework.utils"})
 public class WebApplication {
     public static void main(String[] args) {
         SpringApplication.run(WebApplication.class, args);

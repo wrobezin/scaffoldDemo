@@ -1,6 +1,7 @@
 package io.github.wrobezin.framework.common.check.object;
 
 import io.github.wrobezin.framework.common.check.AbstractParameterValidator;
+import io.github.wrobezin.framework.common.check.ParameterValidator;
 import io.github.wrobezin.framework.common.check.VerifyResult;
 import io.github.wrobezin.framework.common.check.annotation.ObjectFieldVerify;
 import io.github.wrobezin.framework.common.check.array.ArrayValidatorChain;
@@ -9,6 +10,8 @@ import io.github.wrobezin.framework.common.check.string.StringValidatorChain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 因为涉及递归，不好写成链式，否则可能会出现循环依赖。
@@ -24,14 +27,17 @@ public class ObjectFieldValidator extends AbstractParameterValidator<ObjectField
     private final NumberValidatorChain numberValidatorChain;
     private final StringValidatorChain stringValidatorChain;
     private final ArrayValidatorChain arrayValidatorChain;
+    private final List<ParameterValidator> chains;
 
     public ObjectFieldValidator(NumberValidatorChain numberValidatorChain, StringValidatorChain stringValidatorChain, ArrayValidatorChain arrayValidatorChain) {
         this.numberValidatorChain = numberValidatorChain;
         this.stringValidatorChain = stringValidatorChain;
         this.arrayValidatorChain = arrayValidatorChain;
+        this.chains = Arrays.asList(numberValidatorChain, stringValidatorChain, arrayValidatorChain, this);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected VerifyResult verify(ObjectFieldVerify annotation, Object value) {
         VerifyResult result = VerifyResult.VALID;
         try {
@@ -42,15 +48,11 @@ public class ObjectFieldValidator extends AbstractParameterValidator<ObjectField
                 field.setAccessible(true);
                 Object fieldValue = field.get(value);
                 field.setAccessible(accessible);
-                if (fieldValue instanceof String) {
-                    result = stringValidatorChain.chainVerify(field, (String) fieldValue);
-                } else if (fieldValue instanceof Number) {
-                    result = numberValidatorChain.chainVerify(field, (Number) fieldValue);
-                } else if (field.getType().isArray()) {
-                    result = arrayValidatorChain.chainVerify(field, fieldValue);
-                } else if (!field.getType().isPrimitive()) {
-                    // 递归
-                    result = super.verify(field, fieldValue);
+                for (ParameterValidator validator : chains) {
+                    if (validator.classSatisfy().test(field.getType())) {
+                        result = validator.verify(field, fieldValue);
+                        break;
+                    }
                 }
                 if (!result.isValid()) {
                     break;

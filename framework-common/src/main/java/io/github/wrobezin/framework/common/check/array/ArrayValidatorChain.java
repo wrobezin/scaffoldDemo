@@ -1,10 +1,8 @@
 package io.github.wrobezin.framework.common.check.array;
 
 import io.github.wrobezin.framework.common.check.AbstractParameterValidatorChain;
-import io.github.wrobezin.framework.common.check.ParameterValidator;
 import org.springframework.stereotype.Component;
-import java.util.Collections;
-import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author yuan
@@ -13,9 +11,7 @@ import java.util.List;
 @Component
 public class ArrayValidatorChain extends AbstractParameterValidatorChain<Object> {
     @Override
-    protected List<ParameterValidator<Object>> createValidatorChain() {
-        return Collections.singletonList(
-                ArraySizeValidator.getInstance()
-        );
+    public Predicate<Class<?>> classSatisfy() {
+        return Class::isArray;
     }
 }

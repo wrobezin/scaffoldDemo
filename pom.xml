@@ -7,6 +7,7 @@
         <module>framework-common</module>
         <module>framewrok-business</module>
         <module>framework-swagger</module>
+        <module>framework-utils</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

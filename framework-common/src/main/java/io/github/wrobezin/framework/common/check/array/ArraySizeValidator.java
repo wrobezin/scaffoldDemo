@@ -3,23 +3,15 @@ package io.github.wrobezin.framework.common.check.array;
 import io.github.wrobezin.framework.common.check.AbstractParameterValidator;
 import io.github.wrobezin.framework.common.check.VerifyResult;
 import io.github.wrobezin.framework.common.check.annotation.ArraySizeSatisfy;
+import io.github.wrobezin.framework.common.check.annotation.ComponentValidator;
 import java.lang.reflect.Array;
 
 /**
  * @author yuan
  * date: 2019/12/17
  */
+@ComponentValidator
 public class ArraySizeValidator extends AbstractParameterValidator<ArraySizeSatisfy, Object> {
-    private static ArraySizeValidator singleton = new ArraySizeValidator();
-
-    private ArraySizeValidator() {
-
-    }
-
-    static ArraySizeValidator getInstance() {
-        return singleton;
-    }
-
     @Override
     protected VerifyResult verify(ArraySizeSatisfy annotation, Object value) {
         if (!value.getClass().isArray()) {

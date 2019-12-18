@@ -26,7 +26,7 @@ public class ControllerParampeterCheckAspect {
         this.validator = validator;
     }
 
-    @Pointcut("execution(public * io.github.wrobezin.framework.web.controller..*.*(..)) && @annotation(io.github.wrobezin.framework.common.check.ParameterCheck)")
+    @Pointcut("execution(public * io.github.wrobezin.framework.web.controller..*.*(..)) && @annotation(io.github.wrobezin.framework.common.check.annotation.ParameterCheck)")
     public void methodNeedVerified() {
     }
 

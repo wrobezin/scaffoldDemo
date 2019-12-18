@@ -25,6 +25,11 @@
             <artifactId>framewrok-business</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.wrobezin</groupId>
+            <artifactId>framework-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!--Spring AOP-->
         <dependency>

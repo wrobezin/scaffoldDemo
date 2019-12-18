@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.common.check;
+package io.github.wrobezin.framework.common.check.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
