@@ -32,12 +32,8 @@
 #### 在已有校验器链中添加新的校验器
 + 编写新的校验注解。
 + 编写新的校验器类，继承 `AbstractParameterValidator` 类或实现 `ParameterValidator` 接口，针对新写的注解作校验。
-+ 把新写的校验器添加到已有校验器链中（重构点）。
++ 在新写的校验器类上添加 `@ComponentValidator` 注解，注册到校验器链中。
 
 #### 添加新的校验器链
 + 编写新的校验器链类，继承 `AbstractParameterValidatorChain` 类或实现 `ValidatorChain` 接口。
-+ 把新写的校验器链添加到 `AggregateValidator` 类中（重构点）。
-
-### 重构点
-
-见 `common` 模块 `check` 包下的 `TODO`。
++ 在新写的校验器类上添加 `@CompositeValidator` 注解。
