@@ -12,10 +12,10 @@ import io.github.wrobezin.framework.common.check.annotation.IntegerValueSatisfy;
  * date: 2019/12/16
  */
 @ComponentValidator(NumberValidatorChain.class)
-public class IntegerValueValidator extends AbstractParameterValidator<IntegerValueSatisfy, Number> {
+public class IntegerValueValidator extends AbstractParameterValidator<IntegerValueSatisfy, Integer> {
     @Override
-    protected VerifyResult verify(IntegerValueSatisfy annotation, Number value) {
-        if (value.intValue() >= annotation.min() && value.intValue() <= annotation.max()) {
+    protected VerifyResult verify(IntegerValueSatisfy annotation, Integer value) {
+        if (value.compareTo(annotation.min()) >= 0 && value.compareTo(annotation.max()) <= 0) {
             return VerifyResult.VALID;
         }
         return new VerifyResult(false, annotation.invalidMessage());

@@ -23,13 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest(classes = WebApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class HelloControllerTest {
+class ValidatorUseControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @Test
     void hello() throws Exception {
-        mvc.perform(get("/hello"))
+        mvc.perform(get("/validation/hello"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("hello"))
                 .andDo(print());
@@ -38,7 +38,7 @@ class HelloControllerTest {
     @Test
     void user1() throws Exception {
         mvc.perform(
-                post("/user")
+                post("/validation/user")
                         .param("username", "田所浩二")
                         .param("password", "123456")
                         .param("age", "24")
@@ -49,7 +49,7 @@ class HelloControllerTest {
 
     @Test
     void user2() throws Exception {
-        mvc.perform(post("/user")
+        mvc.perform(post("/validation/user")
                 .param("username", "田所浩二田所浩二田所浩二田所浩二田所浩二")
                 .param("password", "123456")
                 .param("age", "24")
@@ -61,7 +61,7 @@ class HelloControllerTest {
     @Test
     void user3() throws Exception {
         mvc.perform(
-                post("/user")
+                post("/validation/user")
                         .param("username", "田所浩二")
                         .param("password", "12345")
                         .param("age", "24")
@@ -73,19 +73,19 @@ class HelloControllerTest {
     @Test
     void user4() throws Exception {
         mvc.perform(
-                post("/user")
+                post("/validation/user")
                         .param("username", "田所浩二")
                         .param("password", "野兽先辈1234")
                         .param("age", "24")
         ).andExpect(status().isOk())
-                .andExpect(content().json("{\"successful\":false,\"message\":\"密码只能包含字母、数字及常规字符\",\"data\":null}"))
+                .andExpect(content().json("{\"successful\":false,\"message\":\"密码只能包含字母、数字及常规符号\",\"data\":null}"))
                 .andDo(print());
     }
 
     @Test
     void user5() throws Exception {
         mvc.perform(
-                post("/user")
+                post("/validation/user")
                         .param("username", "田所浩二")
                         .param("password", "123456")
                         .param("age", "240")
@@ -103,7 +103,7 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
@@ -120,7 +120,7 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
@@ -137,7 +137,7 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
@@ -154,7 +154,7 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
@@ -171,7 +171,7 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
@@ -188,7 +188,7 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机", "雷霆普惠"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
@@ -205,11 +205,38 @@ class HelloControllerTest {
                 new String[]{"红茶", "软手机", "雷霆普惠"}
         );
         mvc.perform(
-                post("/student")
+                post("/validation/student")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JSON.toJSONString(student))
         ).andExpect(status().isOk())
                 .andExpect(content().json("{\"successful\":false,\"message\":\"test不能为空\",\"data\":null}"))
+                .andDo(print());
+    }
+
+    @Test
+    void bigDecimal1() throws Exception {
+        mvc.perform(post("/validation/big-decimal")
+                .param("bigDecimal", "50")
+        ).andExpect(status().isOk())
+                .andExpect(content().json("{\"successful\":true,\"message\":\"操作成功\",\"data\":50}"))
+                .andDo(print());
+    }
+
+    @Test
+    void bigDecimal2() throws Exception {
+        mvc.perform(post("/validation/big-decimal")
+                .param("bigDecimal", "30")
+        ).andExpect(status().isOk())
+                .andExpect(content().json("{\"successful\":false,\"message\":\"范围不对\",\"data\":null}"))
+                .andDo(print());
+    }
+
+    @Test
+    void bigDecimal3() throws Exception {
+        mvc.perform(post("/validation/big-decimal")
+                .param("bigDecimal", "766666666666666666666666666666666666666666666")
+        ).andExpect(status().isOk())
+                .andExpect(content().json("{\"successful\":false,\"message\":\"范围不对\",\"data\":null}"))
                 .andDo(print());
     }
 }

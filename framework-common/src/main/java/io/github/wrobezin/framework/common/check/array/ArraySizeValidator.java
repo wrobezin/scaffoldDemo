@@ -16,9 +16,6 @@ import java.lang.reflect.Array;
 public class ArraySizeValidator extends AbstractParameterValidator<ArraySizeSatisfy, Object> {
     @Override
     protected VerifyResult verify(ArraySizeSatisfy annotation, Object value) {
-        if (!value.getClass().isArray()) {
-            return VerifyResult.VALID;
-        }
         if (annotation.min() <= Array.getLength(value) && Array.getLength(value) <= annotation.max()) {
             return VerifyResult.VALID;
         }

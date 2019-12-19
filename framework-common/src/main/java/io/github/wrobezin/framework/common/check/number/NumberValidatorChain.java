@@ -12,7 +12,7 @@ import java.util.function.Predicate;
  */
 @CompositeValidator
 public class NumberValidatorChain extends AbstractParameterValidatorChain<Number> {
-   @Override
+    @Override
     public Predicate<Class<?>> classSatisfy() {
         return Number.class::isAssignableFrom;
     }

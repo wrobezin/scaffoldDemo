@@ -21,13 +21,13 @@
 
 在 Controller 的方法参数和实体类字段上添加注解，然后通过 AOP 以 `@around` 方式调用 `AggregateValidator` 进行校验。
 
-详见 `web` 模块 `HelloController`、`ControllerParampeterCheckAspect` 两个类的代码 及 `business` 模块 `Student` 等类的代码。
+详见 `web` 模块 `ValidatorUseController`、`ControllerParampeterCheckAspect` 两个类的代码 及 `business` 模块 `Student` 等类的代码。
 
 ### 单元测试
 
-`web` 模块的 `HelloControllerTest` 类。
+`web` 模块的 `ValidatorUseControllerTest` 类。
 
-### 扩展方法（common模块）
+### 扩展方法（common 模块 check 包）
 
 #### 在已有校验器链中添加新的校验器
 + 编写新的校验注解。

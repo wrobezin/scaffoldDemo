@@ -12,10 +12,10 @@ import io.github.wrobezin.framework.common.check.annotation.DoubleValueSatisfy;
  * date: 2019/12/16
  */
 @ComponentValidator(NumberValidatorChain.class)
-public class DoubleValueValidator extends AbstractParameterValidator<DoubleValueSatisfy, Number> {
+public class DoubleValueValidator extends AbstractParameterValidator<DoubleValueSatisfy, Double> {
     @Override
-    protected VerifyResult verify(DoubleValueSatisfy annotation, Number value) {
-        if (value.doubleValue() >= annotation.min() && value.doubleValue() <= annotation.max()) {
+    protected VerifyResult verify(DoubleValueSatisfy annotation, Double value) {
+        if (value.compareTo(annotation.min()) >= 0 && value.compareTo(annotation.max()) <= 0) {
             return VerifyResult.VALID;
         }
         return new VerifyResult(false, annotation.invalidMessage());

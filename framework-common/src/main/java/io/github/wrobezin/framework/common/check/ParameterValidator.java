@@ -28,8 +28,8 @@ public interface ParameterValidator<T> extends Comparable<ParameterValidator<T>>
      */
     @Override
     default int compareTo(ParameterValidator<T> other) {
-        int compareResult = this.getPriority().compareTo(other.getPriority());
-        return compareResult != 0 ? compareResult : Integer.compare(this.hashCode(), other.hashCode());
+        int priorityComparation = this.getPriority().compareTo(other.getPriority());
+        return priorityComparation != 0 ? priorityComparation : Integer.compare(this.hashCode(), other.hashCode());
     }
 
     /**

@@ -29,6 +29,10 @@ public abstract class AbstractParameterValidatorChain<T> implements ValidatorCha
     public VerifyResult verify(AnnotatedElement annotatedElement, T value) {
         // 迭代检验
         for (ParameterValidator<T> validator : chain) {
+            // 类型不匹配，跳过
+            if (!validator.classSatisfy().test(value.getClass())) {
+                continue;
+            }
             VerifyResult verifyResult = validator.verify(annotatedElement, value);
             // 短路
             if (!verifyResult.isValid()) {
