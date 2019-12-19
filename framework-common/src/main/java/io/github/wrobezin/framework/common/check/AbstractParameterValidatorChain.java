@@ -58,7 +58,7 @@ public abstract class AbstractParameterValidatorChain<T> implements ValidatorCha
                 .stream()
                 .filter(c -> Optional
                         .ofNullable(AnnotationUtils.findAnnotation(c, ComponentValidator.class))
-                        .map(ComponentValidator::forChain)
+                        .map(ComponentValidator::registeredChain)
                         .map(this.getClass()::equals)
                         .orElse(false)
                 )

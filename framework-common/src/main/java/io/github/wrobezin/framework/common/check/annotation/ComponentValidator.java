@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ComponentValidator {
     @AliasFor("value")
-    Class<?> forChain() default Object.class;
+    Class<?> registeredChain() default Object.class;
 
     @AliasFor("forChain")
     Class<?> value() default Object.class;
