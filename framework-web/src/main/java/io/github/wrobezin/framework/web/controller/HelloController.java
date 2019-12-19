@@ -3,12 +3,12 @@ package io.github.wrobezin.framework.web.controller;
 import io.github.wrobezin.framework.business.entity.RequestResult;
 import io.github.wrobezin.framework.business.entity.Student;
 import io.github.wrobezin.framework.business.entity.User;
-import io.github.wrobezin.framework.common.check.annotation.ParameterCheck;
 import io.github.wrobezin.framework.common.check.annotation.IntegerValueSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.ObjectFieldVerify;
-import io.github.wrobezin.framework.common.check.string.StringTypeEnum;
+import io.github.wrobezin.framework.common.check.annotation.ParameterCheck;
 import io.github.wrobezin.framework.common.check.annotation.StringLengthSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.StringTypeSatisfy;
+import io.github.wrobezin.framework.common.check.string.StringTypeEnum;
 import io.github.wrobezin.framework.common.request.annotation.PublicRequest;
 import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
+
     @GetMapping("/hello")
     @PublicRequest
     public String hello() {

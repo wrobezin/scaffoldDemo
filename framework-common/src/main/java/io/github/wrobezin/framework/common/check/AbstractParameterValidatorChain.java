@@ -5,12 +5,8 @@ import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.TreeSet;
 
 /**
  * 抽象校验器链。
@@ -22,18 +18,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public abstract class AbstractParameterValidatorChain<T> implements ValidatorChain<T> {
-    private List<ParameterValidator<T>> chain;
-    private Class<T> valueClass;
+    /** 校验器链 */
+    private TreeSet<ParameterValidator<T>> chain;
 
-    @SuppressWarnings("unchecked")
     protected AbstractParameterValidatorChain() {
-        try {
-            ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
-            Type annotationType = type.getActualTypeArguments()[0];
-            this.valueClass = (Class<T>) Class.forName(annotationType.getTypeName());
-        } catch (ClassNotFoundException e) {
-            log.error(e.toString());
-        }
         this.chain = createValidatorChain();
     }
 
@@ -51,33 +39,32 @@ public abstract class AbstractParameterValidatorChain<T> implements ValidatorCha
     }
 
     /**
-     * 子类实现，创建校验器列表。
-     * 在{@code verify}方法中将顺序调用该列表中的校验器。
+     * 创建校验器链。
+     * 在{@code verify}方法中将按优先级从小到大的顺序调用校验器链中的校验器。
      *
-     * @return 校验器列表
-     * @apiNote AbstractParameterValidatorChain构造方法执行时就会调用该方法，子类中若使用Spring进行依赖注入，
-     * 由于父类构造方法先于子类构造方法执行，会导致调用该方法时校验器仍未被注入初始化，将得到null。子类在实
-     * 现该方法时，应使用new等方式创建校验器对象。
-     * @apiNote
+     * @return 校验器集合
+     * @apiNote 子类如需覆盖此方法，建议使用new形式创建校验器，如果使用Spring注入可能会导致NPE。这是因为该方法在
+     * 父类构造方法中被调用时，子类构造方法未执行，所以子类所依赖的组件将未被Spring注入，皆为null。
      */
     @SuppressWarnings("unchecked")
-    protected List<ParameterValidator<T>> createValidatorChain() {
-        List<ParameterValidator<T>> result = new ArrayList<>();
-        List<Class<?>> validatorClasses = PackageScanUtils.classScan(this.getClass().getPackage().getName())
+    protected TreeSet<ParameterValidator<T>> createValidatorChain() {
+        TreeSet<ParameterValidator<T>> result = new TreeSet<>();
+        // 扫包获取@ComponentValidator标记的校验器类字节码，创建被注册到本链的校验器对象，并添加到本链的校验器集合中
+        PackageScanUtils.classScan(this.getClass().getPackage().getName())
                 .stream()
                 .filter(c -> Optional
                         .ofNullable(AnnotationUtils.findAnnotation(c, ComponentValidator.class))
-                        .map(ComponentValidator::type)
-                        .map(valueClass::equals)
+                        .map(ComponentValidator::forChain)
+                        .map(this.getClass()::equals)
                         .orElse(false)
-                ).collect(Collectors.toList());
-        try {
-            for (Class<?> validatorClass : validatorClasses) {
-                result.add((ParameterValidator<T>) validatorClass.newInstance());
-            }
-        } catch (InstantiationException | IllegalAccessException e) {
-            log.error(e.toString());
-        }
+                )
+                .forEach(c -> {
+                    try {
+                        result.add((ParameterValidator<T>) c.newInstance());
+                    } catch (InstantiationException | IllegalAccessException e) {
+                        log.error(e.toString());
+                    }
+                });
         return result;
     }
 }

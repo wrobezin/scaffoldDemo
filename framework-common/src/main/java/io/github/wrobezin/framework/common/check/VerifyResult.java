@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
+ * 校验结果
+ *
  * @author yuan
  * date: 2019/12/16
  */

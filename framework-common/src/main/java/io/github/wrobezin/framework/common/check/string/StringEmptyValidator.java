@@ -7,10 +7,12 @@ import io.github.wrobezin.framework.common.check.annotation.StringNotEmpty;
 import org.springframework.util.StringUtils;
 
 /**
+ * 空字符串校验器
+ *
  * @author yuan
  * date: 2019/12/16
  */
-@ComponentValidator(String.class)
+@ComponentValidator(StringValidatorChain.class)
 public class StringEmptyValidator extends AbstractParameterValidator<StringNotEmpty, String> {
     @Override
     protected VerifyResult verify(StringNotEmpty annotation, String value) {
@@ -18,5 +20,10 @@ public class StringEmptyValidator extends AbstractParameterValidator<StringNotEm
             return new VerifyResult(false, annotation.invalidMessage());
         }
         return VerifyResult.VALID;
+    }
+
+    @Override
+    public Double getPriority() {
+        return 1.0;
     }
 }

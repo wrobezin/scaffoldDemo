@@ -6,10 +6,13 @@ import io.github.wrobezin.framework.common.check.annotation.ComponentValidator;
 import io.github.wrobezin.framework.common.check.annotation.StringTypeSatisfy;
 
 /**
+ * 字符串类型校验器
+ * 支持{@link StringTypeEnum}中的字符串类型
+ *
  * @author yuan
  * date: 2019/12/16
  */
-@ComponentValidator(String.class)
+@ComponentValidator(StringValidatorChain.class)
 public class StringTypeValidator extends AbstractParameterValidator<StringTypeSatisfy, String> {
     @Override
     protected VerifyResult verify(StringTypeSatisfy annotation, String value) {

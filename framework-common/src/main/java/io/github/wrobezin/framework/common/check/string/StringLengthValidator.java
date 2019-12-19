@@ -6,10 +6,12 @@ import io.github.wrobezin.framework.common.check.annotation.ComponentValidator;
 import io.github.wrobezin.framework.common.check.annotation.StringLengthSatisfy;
 
 /**
+ * 字符串长度校验器
+ *
  * @author yuan
  * date: 2019/12/16
  */
-@ComponentValidator(String.class)
+@ComponentValidator(StringValidatorChain.class)
 public class StringLengthValidator extends AbstractParameterValidator<StringLengthSatisfy, String> {
     @Override
     protected VerifyResult verify(StringLengthSatisfy annotation, String value) {
@@ -17,5 +19,10 @@ public class StringLengthValidator extends AbstractParameterValidator<StringLeng
             return VerifyResult.VALID;
         }
         return new VerifyResult(false, annotation.invalidMessage());
+    }
+
+    @Override
+    public Double getPriority() {
+        return 5.0;
     }
 }
