@@ -41,9 +41,11 @@ public class ObjectFieldValidator extends AbstractParameterValidator<ObjectField
                 for (ParameterValidator validator : validators) {
                     if (validator.classSatisfy().test(field.getType())) {
                         result = validator.verify(field, fieldValue);
+                        // 只命中一类校验器
                         break;
                     }
                 }
+                // 只要一个字段校验不通过就返回
                 if (!result.isValid()) {
                     break;
                 }

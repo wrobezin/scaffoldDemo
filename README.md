@@ -37,3 +37,7 @@
 #### 添加新的校验器链
 + 编写新的校验器链类，继承 `AbstractParameterValidatorChain` 类或实现 `ValidatorChain` 接口。
 + 在新写的校验器类上添加 `@CompositeValidator` 注解。
+
+#### 注意点
+
+需要设计好优先级。尤其要注意新链的优先级，因为在聚合校验中只会命中一条链。

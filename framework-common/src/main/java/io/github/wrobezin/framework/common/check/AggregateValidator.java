@@ -32,6 +32,7 @@ public class AggregateValidator {
         for (ParameterValidator validator : validators) {
             if (validator.classSatisfy().test(value.getClass())) {
                 result = validator.verify(annotatedElement, value);
+                // 只命中一类校验器
                 break;
             }
         }
