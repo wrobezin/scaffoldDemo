@@ -13,3 +13,6 @@ swagger:
   license: GPLv3
   version: 0.01
   contactEmail: liangsiyuan@whutosa.com
+  basePackagePath: io.github.wrobezin.framework
+  pathRegex:
+    validation: "/validation/(?!hello).*"

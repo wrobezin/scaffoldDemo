@@ -11,6 +11,7 @@ import io.github.wrobezin.framework.common.check.annotation.StringLengthSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.StringTypeSatisfy;
 import io.github.wrobezin.framework.common.check.string.StringTypeEnum;
 import io.github.wrobezin.framework.common.request.annotation.PublicRequest;
+import io.github.wrobezin.framework.swagger.annotation.RegisterToSwagger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +25,8 @@ import java.math.BigDecimal;
  */
 @RestController
 @RequestMapping("/validation")
-
+@RegisterToSwagger("validation")
 public class ValidatorUseController {
-
     @GetMapping("/hello")
     @PublicRequest
     public String hello() {
