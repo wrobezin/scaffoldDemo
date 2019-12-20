@@ -14,10 +14,13 @@
 + 可插拔的 Shiro 和 SpringSecurity
 + 带后台的独立日志模块
 + 定时任务调度系统
++ 数据脱敏模块
 
 ## 基于注解的 Controller 入参校验
 
 ### 使用方法
+
+添加对 `framework-validator` 模块的依赖。
 
 在 Controller 的方法参数和实体类字段上添加注解，然后通过 AOP 以 `@around` 方式调用 `AggregateValidator` 进行校验。
 
@@ -27,7 +30,7 @@
 
 `web` 模块的 `ValidatorUseControllerTest` 类。
 
-### 扩展方法（common 模块 check 包）
+### 扩展方法
 
 #### 在已有校验器链中添加新的校验器
 + 编写新的校验注解。
