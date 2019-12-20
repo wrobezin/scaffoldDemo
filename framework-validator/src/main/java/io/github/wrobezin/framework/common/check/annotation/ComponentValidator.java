@@ -19,6 +19,6 @@ public @interface ComponentValidator {
     @AliasFor("value")
     Class<?> registeredChain() default Object.class;
 
-    @AliasFor("forChain")
+    @AliasFor("registeredChain")
     Class<?> value() default Object.class;
 }
