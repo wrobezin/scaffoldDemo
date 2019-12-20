@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>framework-web</module>
-        <module>framework-common</module>
+        <module>framework-validator</module>
         <module>framewrok-business</module>
         <module>framework-swagger</module>
         <module>framework-utils</module>

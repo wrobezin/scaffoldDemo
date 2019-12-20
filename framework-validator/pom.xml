@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>framework-common</artifactId>
+    <artifactId>framework-validator</artifactId>
 
     <dependencies>
         <!--兄弟模块-->

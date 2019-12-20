@@ -1,0 +1,15 @@
+server:
+  port: 80
+spring:
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+swagger:
+  title: swagger配置测试
+  description: swagger自动扫描
+  license: GPLv3
+  version: 0.01
+  contactEmail: liangsiyuan@whutosa.com

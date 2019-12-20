@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.wrobezin</groupId>
-            <artifactId>framework-common</artifactId>
+            <artifactId>framework-validator</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

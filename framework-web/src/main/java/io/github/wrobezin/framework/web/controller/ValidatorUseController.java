@@ -24,6 +24,7 @@ import java.math.BigDecimal;
  */
 @RestController
 @RequestMapping("/validation")
+
 public class ValidatorUseController {
 
     @GetMapping("/hello")
