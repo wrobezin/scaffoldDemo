@@ -47,3 +47,11 @@
 #### 注意点
 
 需要设计好优先级。尤其要注意新链的优先级，因为在聚合校验中只会命中一条链。
+
+## 独立 Swagger 模块
+
+### 使用方法
+
+在启动类所在模块添加对 `framework-swagger` 模块的依赖，在配置文件中配置项目信息，配置项对应 `SwaggerApplicationConfig`。
+
+在需要生成文档的 Controller 上添加 `@RegisterToSwagger` 注解。
