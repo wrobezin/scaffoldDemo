@@ -136,7 +136,7 @@ public class SwaggerAutoConfiguration implements ApplicationContextAware {
                         if (handler instanceof WebMvcRequestHandler) {
                             return handlerNames.contains(handler.groupName());
                         }
-                        // CombinedRequestHandler不作过滤
+                        // TODO 暂时未对CombinedRequestHandler作过滤，后续添加
                         return true;
                     })
                     // 根据配置文件中对应分组的正则表达式进行过滤
