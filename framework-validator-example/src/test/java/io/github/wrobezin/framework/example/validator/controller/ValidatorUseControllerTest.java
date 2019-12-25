@@ -1,9 +1,9 @@
 package io.github.wrobezin.framework.example.validator.controller;
 
 import com.alibaba.fastjson.JSON;
-import io.github.wrobezin.framework.business.entity.Student;
-import io.github.wrobezin.framework.business.entity.TestEntity;
 import io.github.wrobezin.framework.example.validator.WebApplication;
+import io.github.wrobezin.framework.example.validator.entity.Student;
+import io.github.wrobezin.framework.example.validator.entity.TestEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

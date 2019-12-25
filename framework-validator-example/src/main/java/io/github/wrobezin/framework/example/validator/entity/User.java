@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.business.entity;
+package io.github.wrobezin.framework.example.validator.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

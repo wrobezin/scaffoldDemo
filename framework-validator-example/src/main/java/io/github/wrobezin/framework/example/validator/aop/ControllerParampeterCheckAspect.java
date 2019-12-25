@@ -1,8 +1,8 @@
 package io.github.wrobezin.framework.example.validator.aop;
 
-import io.github.wrobezin.framework.business.entity.RequestResult;
 import io.github.wrobezin.framework.common.check.AggregateValidator;
 import io.github.wrobezin.framework.common.check.VerifyResult;
+import io.github.wrobezin.framework.example.validator.entity.RequestResult;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

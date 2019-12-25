@@ -1,8 +1,5 @@
 package io.github.wrobezin.framework.example.validator.controller;
 
-import io.github.wrobezin.framework.business.entity.RequestResult;
-import io.github.wrobezin.framework.business.entity.Student;
-import io.github.wrobezin.framework.business.entity.User;
 import io.github.wrobezin.framework.common.check.annotation.BigDecimalValueSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.IntegerValueSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.ObjectFieldVerify;
@@ -11,6 +8,9 @@ import io.github.wrobezin.framework.common.check.annotation.StringLengthSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.StringTypeSatisfy;
 import io.github.wrobezin.framework.common.check.string.StringTypeEnum;
 import io.github.wrobezin.framework.common.request.annotation.PublicRequest;
+import io.github.wrobezin.framework.example.validator.entity.RequestResult;
+import io.github.wrobezin.framework.example.validator.entity.Student;
+import io.github.wrobezin.framework.example.validator.entity.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

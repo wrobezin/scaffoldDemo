@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.business.entity;
+package io.github.wrobezin.framework.example.validator.entity;
 
 import io.github.wrobezin.framework.common.check.annotation.ArraySizeSatisfy;
 import io.github.wrobezin.framework.common.check.annotation.IntegerValueSatisfy;

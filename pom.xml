@@ -5,7 +5,6 @@
     <modules>
         <module>framework-validator</module>
         <module>framework-validator-example</module>
-        <module>framewrok-business</module>
         <module>framework-swagger</module>
         <module>framework-utils</module>
         <module>framework-swagger-example</module>
