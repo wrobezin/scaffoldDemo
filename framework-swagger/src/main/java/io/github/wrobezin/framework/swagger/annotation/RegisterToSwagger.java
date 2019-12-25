@@ -17,8 +17,8 @@ public @interface RegisterToSwagger {
 
     /** 组名 */
     @AliasFor("value")
-    String[] groupName() default DEFAULT_GROUP_NAME;
+    String[] groupNames() default DEFAULT_GROUP_NAME;
 
-    @AliasFor("groupName")
+    @AliasFor("groupNames")
     String[] value() default DEFAULT_GROUP_NAME;
 }

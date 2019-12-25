@@ -8,6 +8,7 @@
         <module>framewrok-business</module>
         <module>framework-swagger</module>
         <module>framework-utils</module>
+        <module>framework-swagger-example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

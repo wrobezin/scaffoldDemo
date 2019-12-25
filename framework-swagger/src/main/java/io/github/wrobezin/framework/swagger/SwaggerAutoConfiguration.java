@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 /**
  * Swagger自动扫包配置
+ * 针对Swagger2.9.2
  * ApiInfo从启动类所在模块的配置文件读取
  * 扫包根据Controller类上的{@link RegisterToSwagger}注解注册到相应分组
  *
@@ -72,7 +73,7 @@ public class SwaggerAutoConfiguration implements ApplicationContextAware {
                         .filter(c -> c.isAnnotationPresent(RegisterToSwagger.class))
                         .forEach(c -> {
                             RegisterToSwagger annotation = AnnotationUtils.findAnnotation(c, RegisterToSwagger.class);
-                            for (String gourpName : annotation.groupName()) {
+                            for (String gourpName : annotation.groupNames()) {
                                 if (groups.containsKey(gourpName)) {
                                     groups.get(gourpName).add(c);
                                 } else {
@@ -113,6 +114,10 @@ public class SwaggerAutoConfiguration implements ApplicationContextAware {
         return Paths.splitCamelCase(clazz.getSimpleName(), "-").replace("/", "").toLowerCase();
     }
 
+    /**
+     * 生成Docket
+     * TODO 添加认证支持
+     */
     @Bean
     public void creatDocket() {
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(Docket.class);
@@ -129,7 +134,8 @@ public class SwaggerAutoConfiguration implements ApplicationContextAware {
                     .map(this::getSwaggerHandlerGroupName)
                     .collect(Collectors.toCollection(HashSet::new));
             Docket docket = context.getBean(name, Docket.class);
-            docket.groupName(name)
+            docket.apiInfo(this.apiInfo)
+                    .groupName(name)
                     .select()
                     // 根据handler的groupName过滤
                     .apis(handler -> {
