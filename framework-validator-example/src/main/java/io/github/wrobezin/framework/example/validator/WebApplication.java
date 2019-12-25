@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.web;
+package io.github.wrobezin.framework.example.validator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

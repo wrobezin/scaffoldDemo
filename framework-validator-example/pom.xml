@@ -10,8 +10,8 @@
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>framework-web</artifactId>
-    <name>framework-web</name>
+    <artifactId>framework-validator-example</artifactId>
+    <name>framework-validator-example</name>
 
     <dependencies>
         <!--兄弟模块-->

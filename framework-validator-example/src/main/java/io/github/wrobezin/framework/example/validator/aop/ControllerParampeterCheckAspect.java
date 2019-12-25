@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.web.aop;
+package io.github.wrobezin.framework.example.validator.aop;
 
 import io.github.wrobezin.framework.business.entity.RequestResult;
 import io.github.wrobezin.framework.common.check.AggregateValidator;
@@ -26,7 +26,7 @@ public class ControllerParampeterCheckAspect {
         this.validator = validator;
     }
 
-    @Pointcut("execution(public * io.github.wrobezin.framework.web.controller..*.*(..)) && @annotation(io.github.wrobezin.framework.common.check.annotation.ParameterCheck)")
+    @Pointcut("execution(public * io.github.wrobezin.framework.example.validator.controller..*.*(..)) && @annotation(io.github.wrobezin.framework.common.check.annotation.ParameterCheck)")
     public void methodNeedVerified() {
     }
 

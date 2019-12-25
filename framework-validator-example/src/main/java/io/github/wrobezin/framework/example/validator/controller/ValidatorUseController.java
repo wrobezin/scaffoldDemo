@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.web.controller;
+package io.github.wrobezin.framework.example.validator.controller;
 
 import io.github.wrobezin.framework.business.entity.RequestResult;
 import io.github.wrobezin.framework.business.entity.Student;

@@ -1,6 +1,6 @@
-package io.github.wrobezin.framework.web.config;
+package io.github.wrobezin.framework.example.validator.config;
 
-import io.github.wrobezin.framework.web.interceptor.HeaderInterceptor;
+import io.github.wrobezin.framework.example.validator.interceptor.HeaderInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 

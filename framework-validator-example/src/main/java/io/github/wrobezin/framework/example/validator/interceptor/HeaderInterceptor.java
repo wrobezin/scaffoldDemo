@@ -1,4 +1,4 @@
-package io.github.wrobezin.framework.web.interceptor;
+package io.github.wrobezin.framework.example.validator.interceptor;
 
 import io.github.wrobezin.framework.common.request.annotation.PublicRequest;
 import lombok.extern.slf4j.Slf4j;
