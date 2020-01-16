@@ -3,7 +3,7 @@ package io.github.wrobezin.framework.example.swagger.entity;
 import lombok.Data;
 
 /**
- * @author <a href="mailto:siyuan_liang@sui.com">siyuan_liang</a>
+ * @author yuan
  * date: 2019/12/25
  */
 @Data

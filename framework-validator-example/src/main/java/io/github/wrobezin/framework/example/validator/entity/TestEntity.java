@@ -1,6 +1,6 @@
 package io.github.wrobezin.framework.example.validator.entity;
 
-import io.github.wrobezin.framework.common.check.annotation.StringRegexSatisfy;
+import io.github.wrobezin.framework.validator.annotation.StringRegexSatisfy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

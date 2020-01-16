@@ -15,7 +15,7 @@
         <dependency>
             <groupId>io.github.wrobezin</groupId>
             <artifactId>framework-swagger</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -70,7 +70,7 @@ public class ParameterTypeReader implements ParameterBuilderPlugin {
      *     ResolvedType parameterType = resolvedMethodParameter.getParameterType();
      *     parameterType = parameterContext.alternateFor(parameterType);
      *
-     *     //Multi-part file trumps any other annotations
+     *     // Multi-part file trumps any other annotations
      *     if (isFileType(parameterType) || isListOfFiles(parameterType)) {
      *       return "form";
      *     }

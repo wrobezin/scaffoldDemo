@@ -11,24 +11,29 @@
 
     <artifactId>framework-swagger</artifactId>
 
+    <properties>
+        <swagger2.version>2.9.2</swagger2.version>
+        <swagger-ui.version>2.9.2</swagger-ui.version>
+    </properties>
+
     <dependencies>
         <!--兄弟模块-->
         <dependency>
             <groupId>io.github.wrobezin</groupId>
             <artifactId>framework-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger2.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${swagger-ui.version}</version>
         </dependency>
 
         <!--SpringConfiguration-->

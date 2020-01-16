@@ -31,13 +31,13 @@
 
 在 Controller 的方法参数和实体类字段上添加注解，然后通过 AOP 以 `@around` 方式调用 `AggregateValidator` 进行校验。
 
-详见 `framework-validator-example` 模块 `ValidatorUseController`、`ControllerParampeterCheckAspect`、`Student` 等类的代码。
+详见 `framework-validator-example` 模块的 `ValidatorUseController`、`ControllerParampeterCheckAspect`、`Student` 等类的代码。
 
 ### 单元测试
 
 `framework-validator-example` 模块的 `ValidatorUseControllerTest` 类。
 
-### 扩展方法
+### 扩展方法````
 
 #### 在已有校验器链中添加新的校验器
 + 编写新的校验注解。
@@ -87,4 +87,4 @@ Swagger2 本身是存在一些 bug 的。
 
 ### 单元测试
 
-待添加
+待模块完善后添加

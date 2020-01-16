@@ -2,16 +2,10 @@ package io.github.wrobezin.framework.swagger;
 
 import io.github.wrobezin.framework.swagger.annotation.RegisterToSwagger;
 import io.github.wrobezin.framework.swagger.property.SwaggerApplicationConfig;
-import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
+import io.github.wrobezin.framework.utils.resource.PackageScanUtils;
+import io.github.wrobezin.framework.utils.spring.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -44,19 +38,13 @@ import java.util.stream.Collectors;
 @EnableSwagger2
 @EnableConfigurationProperties(value = SwaggerApplicationConfig.class)
 @Slf4j
-public class SwaggerAutoConfiguration implements ApplicationContextAware {
+public class SwaggerAutoConfiguration {
     private final SwaggerApplicationConfig applicationConfig;
-    private ConfigurableApplicationContext context;
     private Map<String, Set<Class<?>>> groups = new HashMap<>(8);
     private ApiInfo apiInfo;
 
     public SwaggerAutoConfiguration(SwaggerApplicationConfig applicationConfig) {
         this.applicationConfig = applicationConfig;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.context = (ConfigurableApplicationContext) applicationContext;
         this.initGroupMap();
         this.initApiInfo();
     }
@@ -120,20 +108,18 @@ public class SwaggerAutoConfiguration implements ApplicationContextAware {
      */
     @Bean
     public void creatDocket() {
-        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(Docket.class);
-        beanDefinitionBuilder.addConstructorArgValue(DocumentationType.SWAGGER_2);
-        BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
-        BeanDefinitionRegistry beanFactory = (BeanDefinitionRegistry) context.getBeanFactory();
         // 若不存在任何分组，则创建一个空的默认分组，否则Swagger会自动获取所有类
         if (groups.isEmpty()) {
             groups.put(RegisterToSwagger.DEFAULT_GROUP_NAME, new HashSet<>());
         }
         groups.forEach((name, classes) -> {
-            beanFactory.registerBeanDefinition(name, beanDefinition);
+            // 注册Docket到Spring
+            BeanUtils.registerBean(Docket.class, name, DocumentationType.SWAGGER_2);
+            // 获取Docket引用
+            Docket docket = BeanUtils.getBean(name, Docket.class);
             HashSet<String> handlerNames = classes.stream()
                     .map(this::getSwaggerHandlerGroupName)
                     .collect(Collectors.toCollection(HashSet::new));
-            Docket docket = context.getBean(name, Docket.class);
             docket.apiInfo(this.apiInfo)
                     .groupName(name)
                     .select()

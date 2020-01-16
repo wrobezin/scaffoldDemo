@@ -11,5 +11,65 @@
 
     <artifactId>framework-utils</artifactId>
 
+    <properties>
+        <bouncycastle.version>1.64</bouncycastle.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-codec.version>1.13</commons-codec.version>
+        <httpclient.version>4.5.10</httpclient.version>
+        <httpmime.version>4.5.10</httpmime.version>
+        <httpcore.version>4.4.12</httpcore.version>
+        <poi.version>4.1.1</poi.version>
+    </properties>
+
+    <dependencies>
+        <!--BouncyCastle-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${bouncycastle.version}</version>
+        </dependency>
+
+        <!--ApacheCommons-->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons-codec.version}</version>
+        </dependency>
+
+        <!--ApacheHttpcompoents-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpmime.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${httpcore.version}</version>
+        </dependency>
+
+        <!--ApachePoi-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

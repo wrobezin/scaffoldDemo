@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author <a href="mailto:siyuan_liang@sui.com">siyuan_liang</a>
+ * @author yuan
  * date: 2019/12/25
  */
 @RestController

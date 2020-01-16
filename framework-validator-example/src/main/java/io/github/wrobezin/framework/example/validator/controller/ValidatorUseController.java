@@ -1,16 +1,15 @@
 package io.github.wrobezin.framework.example.validator.controller;
 
-import io.github.wrobezin.framework.common.check.annotation.BigDecimalValueSatisfy;
-import io.github.wrobezin.framework.common.check.annotation.IntegerValueSatisfy;
-import io.github.wrobezin.framework.common.check.annotation.ObjectFieldVerify;
-import io.github.wrobezin.framework.common.check.annotation.ParameterCheck;
-import io.github.wrobezin.framework.common.check.annotation.StringLengthSatisfy;
-import io.github.wrobezin.framework.common.check.annotation.StringTypeSatisfy;
-import io.github.wrobezin.framework.common.check.string.StringTypeEnum;
-import io.github.wrobezin.framework.common.request.annotation.PublicRequest;
 import io.github.wrobezin.framework.example.validator.entity.RequestResult;
 import io.github.wrobezin.framework.example.validator.entity.Student;
 import io.github.wrobezin.framework.example.validator.entity.User;
+import io.github.wrobezin.framework.validator.annotation.BigDecimalValueSatisfy;
+import io.github.wrobezin.framework.validator.annotation.IntegerValueSatisfy;
+import io.github.wrobezin.framework.validator.annotation.ObjectFieldVerify;
+import io.github.wrobezin.framework.validator.annotation.ParameterCheck;
+import io.github.wrobezin.framework.validator.annotation.StringLengthSatisfy;
+import io.github.wrobezin.framework.validator.annotation.StringTypeSatisfy;
+import io.github.wrobezin.framework.validator.string.StringTypeEnum;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,6 @@ import java.math.BigDecimal;
 @RequestMapping("/validation")
 public class ValidatorUseController {
     @GetMapping("/hello")
-    @PublicRequest
     public String hello() {
         return "hello";
     }

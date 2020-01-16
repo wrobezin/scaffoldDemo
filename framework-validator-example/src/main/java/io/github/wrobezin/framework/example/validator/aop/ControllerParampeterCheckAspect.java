@@ -1,7 +1,7 @@
 package io.github.wrobezin.framework.example.validator.aop;
 
-import io.github.wrobezin.framework.common.check.AggregateValidator;
-import io.github.wrobezin.framework.common.check.VerifyResult;
+import io.github.wrobezin.framework.validator.AggregateValidator;
+import io.github.wrobezin.framework.validator.VerifyResult;
 import io.github.wrobezin.framework.example.validator.entity.RequestResult;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -26,7 +26,7 @@ public class ControllerParampeterCheckAspect {
         this.validator = validator;
     }
 
-    @Pointcut("execution(public * io.github.wrobezin.framework.example.validator.controller..*.*(..)) && @annotation(io.github.wrobezin.framework.common.check.annotation.ParameterCheck)")
+    @Pointcut("execution(public * io.github.wrobezin.framework.example.validator.controller..*.*(..)) && @annotation(io.github.wrobezin.framework.validator.annotation.ParameterCheck)")
     public void methodNeedVerified() {
     }
 

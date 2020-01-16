@@ -6,12 +6,13 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author <a href="mailto:siyuan_liang@sui.com">siyuan_liang</a>
+ * @author yuan
  * date: 2019/12/25
  */
 @RestController
@@ -40,6 +41,11 @@ public class SwaggerHelloExampleController {
 
     @PostMapping("/entity")
     public Object helloEntity(SwaggerExampleEntity entity) {
+        return entity;
+    }
+
+    @PostMapping("/body")
+    public Object helloBody(@RequestBody SwaggerExampleEntity entity) {
         return entity;
     }
 }

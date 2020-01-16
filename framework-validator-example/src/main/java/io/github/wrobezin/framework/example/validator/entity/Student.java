@@ -1,10 +1,10 @@
 package io.github.wrobezin.framework.example.validator.entity;
 
-import io.github.wrobezin.framework.common.check.annotation.ArraySizeSatisfy;
-import io.github.wrobezin.framework.common.check.annotation.IntegerValueSatisfy;
-import io.github.wrobezin.framework.common.check.annotation.NotNullable;
-import io.github.wrobezin.framework.common.check.annotation.ObjectFieldVerify;
-import io.github.wrobezin.framework.common.check.annotation.StringRegexSatisfy;
+import io.github.wrobezin.framework.validator.annotation.ArraySizeSatisfy;
+import io.github.wrobezin.framework.validator.annotation.IntegerValueSatisfy;
+import io.github.wrobezin.framework.validator.annotation.NotNullable;
+import io.github.wrobezin.framework.validator.annotation.ObjectFieldVerify;
+import io.github.wrobezin.framework.validator.annotation.StringRegexSatisfy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
