@@ -2,7 +2,7 @@ package io.github.wrobezin.framework.swagger;
 
 import io.github.wrobezin.framework.swagger.annotation.RegisterToSwagger;
 import io.github.wrobezin.framework.swagger.property.SwaggerApplicationConfig;
-import io.github.wrobezin.framework.utils.resource.PackageScanUtils;
+import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
 import io.github.wrobezin.framework.utils.spring.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
