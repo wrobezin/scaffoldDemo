@@ -1,6 +1,5 @@
 package io.github.wrobezin.framework.utils.spring;
 
-import io.github.wrobezin.framework.utils.resource.PackageScanUtils;
 import io.github.wrobezin.framework.utils.spring.useless.A;
 import io.github.wrobezin.framework.utils.spring.useless.B;
 import lombok.extern.slf4j.Slf4j;
