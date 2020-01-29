@@ -74,11 +74,11 @@ public final class HttpUrlUtils {
                             LinkedHashMap::new,
                             (map, string) -> {
                                 String[] kv = string.split("=");
-                                map.put(urlDecode(kv[0]), urlDecode(kv[1]));
+                                map.put(urlDecode(kv[0]), kv.length > 1 ? urlDecode(kv[1]) : "");
                             },
                             LinkedHashMap::putAll
                     );
-                    return new UrlInfo(protocal, host, StringUtils.isBlank(port) ? 80 : Integer.parseInt(port), urlDecode(path), urlDecode(paramString), paramMap);
+                    return new UrlInfo(url, protocal, host, StringUtils.isBlank(port) ? 80 : Integer.parseInt(port), urlDecode(path), urlDecode(paramString), paramMap);
                 }).orElse(UrlInfo.BLANK);
     }
 
@@ -86,7 +86,9 @@ public final class HttpUrlUtils {
         Arrays.asList(
                 "http://t.test.com:80/a-b/123",
                 "https://t.test.com/a-b/123?fuck=shit&a=0.88&b=c",
-                "http://test.com/中文测试?中文=测试&eunha=银河"
+                "http://test.com/中文测试?中文=测试&eunha=银河",
+                "http://test.com/?没有值",
+                "http://test.com/?没有值&mmp=sb"
         ).forEach(url -> System.out.println(JSON.toJSONString(parseUrl(url))));
     }
 }

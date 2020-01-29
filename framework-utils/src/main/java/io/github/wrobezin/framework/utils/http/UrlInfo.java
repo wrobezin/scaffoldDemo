@@ -16,17 +16,19 @@ import java.util.Map;
 @NoArgsConstructor
 public class UrlInfo {
     @JSONField(ordinal = 1)
-    private String protocal;
+    private String url;
     @JSONField(ordinal = 2)
-    private String host;
+    private String protocal;
     @JSONField(ordinal = 3)
-    private Integer port;
+    private String host;
     @JSONField(ordinal = 4)
-    private String path;
+    private Integer port;
     @JSONField(ordinal = 5)
-    private String paramString;
+    private String path;
     @JSONField(ordinal = 6)
+    private String paramString;
+    @JSONField(ordinal = 7)
     private Map<String, String> paramMap;
 
-    public static final UrlInfo BLANK = new UrlInfo("", "", 80, "", "", new HashMap<>(0));
+    public static final UrlInfo BLANK = new UrlInfo("", "", "", 80, "", "", new HashMap<>(0));
 }
