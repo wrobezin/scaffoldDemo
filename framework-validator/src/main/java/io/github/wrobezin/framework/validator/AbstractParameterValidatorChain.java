@@ -1,7 +1,7 @@
 package io.github.wrobezin.framework.validator;
 
 import io.github.wrobezin.framework.validator.annotation.ComponentValidator;
-import io.github.wrobezin.framework.utils.resource.PackageScanUtils;
+import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import java.lang.reflect.AnnotatedElement;

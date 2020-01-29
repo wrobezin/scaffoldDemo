@@ -1,7 +1,7 @@
 package io.github.wrobezin.framework.validator;
 
 import io.github.wrobezin.framework.validator.annotation.CompositeValidator;
-import io.github.wrobezin.framework.utils.resource.PackageScanUtils;
+import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import java.util.TreeSet;
