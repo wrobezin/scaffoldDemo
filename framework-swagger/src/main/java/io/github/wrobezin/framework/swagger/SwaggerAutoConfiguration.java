@@ -2,8 +2,8 @@ package io.github.wrobezin.framework.swagger;
 
 import io.github.wrobezin.framework.swagger.annotation.RegisterToSwagger;
 import io.github.wrobezin.framework.swagger.property.SwaggerApplicationConfig;
+import io.github.wrobezin.framework.utils.spring.BeanHelper;
 import io.github.wrobezin.framework.utils.spring.PackageScanUtils;
-import io.github.wrobezin.framework.utils.spring.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +18,8 @@ import springfox.documentation.spring.web.WebMvcRequestHandler;
 import springfox.documentation.spring.web.paths.Paths;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,11 +39,13 @@ public class SwaggerAutoConfiguration {
     private final SwaggerApplicationConfig applicationConfig;
     private Map<String, Set<Class<?>>> groups = new HashMap<>(8);
     private ApiInfo apiInfo;
+    private final BeanHelper beanHelper;
 
-    public SwaggerAutoConfiguration(SwaggerApplicationConfig applicationConfig) {
+    public SwaggerAutoConfiguration(SwaggerApplicationConfig applicationConfig, BeanHelper beanHelper) {
         this.applicationConfig = applicationConfig;
         this.initGroupMap();
         this.initApiInfo();
+        this.beanHelper = beanHelper;
     }
 
     /**
@@ -61,7 +60,7 @@ public class SwaggerAutoConfiguration {
                         .filter(c -> c.isAnnotationPresent(RegisterToSwagger.class))
                         .forEach(c -> {
                             RegisterToSwagger annotation = AnnotationUtils.findAnnotation(c, RegisterToSwagger.class);
-                            for (String gourpName : annotation.groupNames()) {
+                            for (String gourpName : Optional.ofNullable(annotation).map(RegisterToSwagger::groupNames).orElse(new String[0])) {
                                 if (groups.containsKey(gourpName)) {
                                     groups.get(gourpName).add(c);
                                 } else {
@@ -114,9 +113,9 @@ public class SwaggerAutoConfiguration {
         }
         groups.forEach((name, classes) -> {
             // 注册Docket到Spring
-            BeanUtils.registerBean(Docket.class, name, DocumentationType.SWAGGER_2);
+            beanHelper.registerBean(Docket.class, name, DocumentationType.SWAGGER_2);
             // 获取Docket引用
-            Docket docket = BeanUtils.getBean(name, Docket.class);
+            Docket docket = beanHelper.getBean(name, Docket.class);
             HashSet<String> handlerNames = classes.stream()
                     .map(this::getSwaggerHandlerGroupName)
                     .collect(Collectors.toCollection(HashSet::new));

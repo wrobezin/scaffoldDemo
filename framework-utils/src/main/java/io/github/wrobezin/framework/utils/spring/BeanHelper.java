@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
+
 import java.util.Optional;
 
 /**
@@ -18,32 +19,32 @@ import java.util.Optional;
  * date: 2019/12/26
  */
 @Component
-public final class BeanUtils implements ApplicationContextAware {
+public class BeanHelper implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
     private static final int RANDOM_BEAN_NAME_LENGTH = 6;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
-        BeanUtils.applicationContext = applicationContext;
+        BeanHelper.applicationContext = applicationContext;
     }
 
-    public static Object getBean(String name) {
+    public Object getBean(String name) {
         return applicationContext.getBean(name);
     }
 
-    public static ApplicationContext getApplicationContext() {
+    public ApplicationContext getApplicationContext() {
         return applicationContext;
     }
 
-    public static <T> T getBean(Class<T> tClass) {
+    public <T> T getBean(Class<T> tClass) {
         return applicationContext.getBean(tClass);
     }
 
-    public static <T> T getBean(String name, Class<T> tClass) {
+    public <T> T getBean(String name, Class<T> tClass) {
         return applicationContext.getBean(name, tClass);
     }
 
-    public static void registerBean(Class<?> beanClass, String name, Object... constructorArgs) {
+    public void registerBean(Class<?> beanClass, String name, Object... constructorArgs) {
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
         for (Object arg : constructorArgs) {
             beanDefinitionBuilder.addConstructorArgValue(arg);
