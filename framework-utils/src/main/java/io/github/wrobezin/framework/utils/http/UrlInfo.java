@@ -2,33 +2,64 @@ package io.github.wrobezin.framework.utils.http;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 绝对路径URL信息
+ *
  * @author yuan
  * date: 2020/1/21
  */
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class UrlInfo {
     @JSONField(ordinal = 1)
-    private String url;
-    @JSONField(ordinal = 2)
     private String protocal;
-    @JSONField(ordinal = 3)
+    @JSONField(ordinal = 2)
     private String host;
-    @JSONField(ordinal = 4)
+    @JSONField(ordinal = 3)
     private Integer port;
-    @JSONField(ordinal = 5)
+    @JSONField(ordinal = 4)
     private String path;
+    @JSONField(ordinal = 5)
+    private String queryString;
     @JSONField(ordinal = 6)
-    private String paramString;
+    private Map<String, String> queryMap;
     @JSONField(ordinal = 7)
-    private Map<String, String> paramMap;
+    private String fragment;
 
-    public static final UrlInfo BLANK = new UrlInfo("", "", "", 80, "", "", new HashMap<>(0));
+    public String getBaseUrl() {
+        return getProtocal() + "://" + getHost() + ":" + getPort() + getPath();
+    }
+
+    public String getUrlWithQuery() {
+        String baseUrl = getBaseUrl();
+        String queryString = getQueryString();
+        if (!StringUtils.isBlank(queryString)) {
+            baseUrl += "?" + queryString;
+        }
+        return baseUrl;
+    }
+
+    public static final UrlInfo BLANK = UrlInfo.builder()
+            .protocal("")
+            .host("")
+            .port(80)
+            .path("")
+            .queryString("")
+            .queryMap(new HashMap<>(0))
+            .fragment("")
+            .build();
+
+    public boolean isHttpUrl() {
+        return this.getProtocal().startsWith("http");
+    }
 }
